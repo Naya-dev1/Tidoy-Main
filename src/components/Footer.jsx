@@ -29,10 +29,10 @@ const Footer = () => {
         Quick Links
       </h6>
       <div className="flex flex-col gap-[12px]">
-        <Link className="font-bold text-[16px] text-[#FFFFFF]">Home</Link>
-        <Link className="font-bold text-[16px] text-[#FFFFFF]">About</Link>
-        <Link className="font-bold text-[16px] text-[#FFFFFF]">Contact</Link>
-        <Link className="font-bold text-[16px] text-[#FFFFFF]">Blog</Link>
+        <Link to="/" className="font-bold text-[16px] text-[#FFFFFF]">Home</Link>
+        <Link to="/about"  className="font-bold text-[16px] text-[#FFFFFF]">About</Link>
+        <Link to="/contact"  className="font-bold text-[16px] text-[#FFFFFF]">Contact</Link>
+        <Link to="/blog"  className="font-bold text-[16px] text-[#FFFFFF]">Blog</Link>
       </div>
     </div>
 

@@ -14,6 +14,8 @@ import ProductDetail from "./pages/ProductDetail";
 import ProfilePage from "./pages/ProfilePage";
 import { AuthProvider } from "./contexts/AuthContext";
 import NotFoundPage from "./pages/NotFoundPage";
+import About from "./pages/About";
+import Discover from "./pages/Discover";
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
 
                   {/* 404 Catch All */}
                   <Route path="*" element={<NotFoundPage />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/discover" element={<Discover />} />
                 </Routes>
               </BrowserRouter>
             </DateProvider>

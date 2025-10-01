@@ -81,7 +81,7 @@ const NavBar = () => {
           </Link>
           <div className="flex items-center gap-[35px]">
             <Link
-              to="/search-results"
+              to="/discover"
               className="text-[18px] text-[#2D2E2E] font-medium tracking-tighter"
             >
               Discover
@@ -89,7 +89,10 @@ const NavBar = () => {
             <Link className="text-[18px] text-[#2D2E2E] font-medium tracking-tighter">
               Stay
             </Link>
-            <Link className="text-[18px] text-[#2D2E2E] font-medium tracking-tighter">
+            <Link
+              to="/about"
+              className="text-[18px] text-[#2D2E2E] font-medium tracking-tighter"
+            >
               About
             </Link>
           </div>
@@ -173,6 +176,7 @@ const NavBar = () => {
       </div>
 
       {/* Mobile */}
+      {/* Mobile */}
       <div className="w-full md:hidden">
         <div className="flex justify-between items-center w-full py-5">
           <Link to="/">
@@ -192,10 +196,16 @@ const NavBar = () => {
           {loading ? (
             <div className="w-6 h-6 border-2 border-gray-300 border-t-[#FF9A01] rounded-full animate-spin"></div>
           ) : !user ? (
+            // GUEST → Hamburger
             <button onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? <IoCloseOutline size={28} /> : <IoMenuOutline size={28} />}
+              {menuOpen ? (
+                <IoCloseOutline size={28} />
+              ) : (
+                <IoMenuOutline size={28} />
+              )}
             </button>
           ) : (
+            // LOGGED IN → Profile Icon
             <div className="relative">
               {user.photo ? (
                 <img
@@ -211,37 +221,64 @@ const NavBar = () => {
                   onClick={() => setShowDropdown(!showDropdown)}
                 />
               )}
-              {showDropdown && <AuthDropdown />}
+              {showDropdown && (
+                <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-md z-20">
+                  <Link
+                    to="/discover"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    onClick={() => setShowDropdown(false)}
+                  >
+                    Discover
+                  </Link>
+                  <Link
+                    to="/stay"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    onClick={() => setShowDropdown(false)}
+                  >
+                    Stay
+                  </Link>
+                  <Link
+                    to="/about"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    onClick={() => setShowDropdown(false)}
+                  >
+                    About
+                  </Link>
+                  <Link
+                    to="/profile"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    onClick={() => setShowDropdown(false)}
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={() => {
+                      logout();
+                      setShowDropdown(false);
+                    }}
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>
 
-        {/* Mobile Guest Menu */}
+        {/* Guest Menu */}
         {menuOpen && !user && !loading && (
           <div className="md:hidden bg-white shadow-lg border-t border-gray-200">
             <div className="flex flex-col space-y-4 px-6 py-5 font-medium">
-              <Link
-                to="/search-results"
-                className="hover:text-[#1A4D8F]"
-                onClick={() => setMenuOpen(false)}
-              >
+              <Link to="/discover" onClick={() => setMenuOpen(false)}>
                 Discover
               </Link>
-              <Link
-                to="/stay"
-                className="hover:text-[#1A4D8F]"
-                onClick={() => setMenuOpen(false)}
-              >
+              <Link to="/stay" onClick={() => setMenuOpen(false)}>
                 Stay
               </Link>
-              <Link
-                to="/about"
-                className="hover:text-[#1A4D8F]"
-                onClick={() => setMenuOpen(false)}
-              >
+              <Link to="/about" onClick={() => setMenuOpen(false)}>
                 About
               </Link>
-
               <Link to="/sign-up" onClick={() => setMenuOpen(false)}>
                 <button className="w-full text-[#2D2E2E] text-[16px] font-medium bg-[#FF9A01] px-6 py-2 rounded-[12px]">
                   Sign Up

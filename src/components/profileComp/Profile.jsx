@@ -1,16 +1,12 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import NavBar from "../NavBar";
-import { IoMdSearch, IoMdClose } from "react-icons/io";
-import profile from "../../assets/profilepic.png";
-import drop from "../../assets/drop.png";
-import logo from "../../assets/logo.png";
+import { IoPersonCircle } from "react-icons/io5";
 import profileIcon from "../../assets/profile-icon.png";
 import legal from "../../assets/legal.png";
 import settings from "../../assets/settings.png";
 import help from "../../assets/help.png";
 import language from "../../assets/language.png";
-import { IoPersonCircle } from "react-icons/io5";
 import verify from "../../assets/verified2.png";
 import edit from "../../assets/edit.png";
 import down from "../../assets/arrow_down.png";
@@ -18,7 +14,6 @@ import logoutIcon from "../../assets/logout.png";
 import Footer from "../Footer";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { createPortal } from "react-dom";
 
 const Profile = () => {
   const { user, logout, loading, updateProfile } = useContext(AuthContext);
@@ -31,27 +26,21 @@ const Profile = () => {
     photo: "",
   });
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [active, setActive] = useState(""); // Track selected option
   const [saving, setSaving] = useState(false);
   const fileInputRef = useRef(null);
 
-  // 👇 collapse state for mobile
   const [showEditForm, setShowEditForm] = useState(false);
 
-  const handleClick = (option) => {
-    setActive(option);
-  };
-
-  // preload user data
+  // load saved photo from localStorage
   useEffect(() => {
+    const savedPhoto = localStorage.getItem("userPhoto");
     if (user) {
       setFormData({
         name: user.name || "",
         email: user.email || "",
         gender: user.gender || "",
         number: user.number || "",
-        photo: user.photo || "",
+        photo: savedPhoto || user.photo || "",
       });
     }
   }, [user]);
@@ -75,14 +64,22 @@ const Profile = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // ✅ Use Base64 instead of createObjectURL
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setFormData((prev) => ({ ...prev, photo: imageUrl }));
-      updateProfile({ photo: imageUrl });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        setFormData((prev) => ({ ...prev, photo: base64String }));
+        updateProfile({ photo: base64String });
 
-      toast.success("Profile photo updated ✅");
+        // save to localStorage
+        localStorage.setItem("userPhoto", base64String);
+
+        toast.success("Profile photo updated ✅");
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -103,12 +100,12 @@ const Profile = () => {
 
   return (
     <div>
-      <div className="z-50  backdrop-blur-[10px] bg-[#FBFBFB59]  fixed w-full top-0 sm:px-[100px] px-6 ">
+      {/* Navbar */}
+      <div className="z-50 backdrop-blur-[10px] bg-[#FBFBFB59] fixed w-full top-0 sm:px-[100px] px-6 ">
         <NavBar />
       </div>
-      <div className="md:px-[100px] px-6 w-full pt-[120px]">
-        {/* <MenuDropdown /> */}
 
+      <div className="md:px-[100px] px-6 w-full pt-[120px]">
         <h2 className="md:text-[32px] text-[20px] font-bold text-[#000000] md:my-[33px] my-6">
           Profile
         </h2>
@@ -179,22 +176,21 @@ const Profile = () => {
             {/* Divider */}
             <div className="hidden md:block w-px h-[300px] bg-[#2D2E2E] mx-4"></div>
           </div>
+
           {/* Profile Info */}
           <div className="flex flex-col md:gap-[32px] mb-[117px] md:w-[820px] w-full gap-6">
             {(showEditForm || window.innerWidth >= 768) && (
               <>
                 {/* Profile header */}
-                <div className="bg-[#EDF1F5] rounded-[19px] relative flex flex-col md:flex-row md:gap-[36px] gap-6 md:px-[34px] px-6 items-center w-full">
+                <div className="bg-[#EDF1F5] rounded-[19px] relative flex flex-col md:flex-row md:gap-[36px] gap-6 md:px-[34px] px-6 items-center w-full ">
                   {formData.photo ? (
                     <img
                       src={formData.photo}
                       alt="profile"
-                      className="w-[159px] h-[240px] py-[52px] rounded-full object-cover  " size={100}
+                      className="w-[159px] md:my-8 mt-4 h-[159px] rounded-full object-cover relative"
                     />
                   ) : (
-                    <div className="w-[159px] h-[159px] py-[52px]  rounded-full flex items-center justify-center">
-                      <IoPersonCircle className="text-gray-400" size={100} />
-                    </div>
+                    <IoPersonCircle className="text-gray-400 w-[159px] h-[159px]" />
                   )}
 
                   <input
@@ -206,7 +202,7 @@ const Profile = () => {
                   />
 
                   <div
-                    className="absolute md:bottom-[40px] top-30 h-[40px] md:left-[54px] flex items-center bg-white gap-2 md:p-3 p-2 rounded-[8px] cursor-pointer"
+                    className="absolute md:top-[150px] top-35 h-[40px] md:left-[56px] flex items-center bg-white gap-2 md:p-3 p-2 rounded-[8px] cursor-pointer"
                     onClick={() => fileInputRef.current.click()}
                   >
                     <img src={edit} alt="" className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -326,6 +322,7 @@ const Profile = () => {
                           email: user.email || "",
                           gender: user.gender || "",
                           number: user.number || "",
+                          photo: localStorage.getItem("userPhoto") || "",
                         })
                       }
                     >
