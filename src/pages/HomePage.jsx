@@ -2,17 +2,16 @@ import React, { useEffect } from "react";
 import HeroSection from "../components/HeroSection";
 import MainHome from "./home/MainHome";
 import NavBar from "../components/NavBar";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const HomePage = () => {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const reference = searchParams.get("reference");
+  const reference = searchParams.get("reference") || searchParams.get("trxref");
 
   useEffect(() => {
     const verifyPayment = async () => {
-      if (!reference) return;
+      if (!reference) return; // if no reference, just show homepage normally
 
       try {
         const res = await fetch(
@@ -20,26 +19,22 @@ const HomePage = () => {
         );
         const data = await res.json();
 
-        if (data && data.message === "Payment successful") {
-          toast.success("Payment verified ✅");
-          navigate("/", { replace: true });
-          // redirect to homepage
+        if (data?.message === "Payment successful") {
+          toast.success("Payment verified");
         } else {
-          toast("Payment failed ");
-          navigate("/", { replace: true });
+          toast.error("Payment failed");
         }
       } catch (err) {
         console.error("Verification error:", err);
-        toast.error("Error verifying payment ");
-        navigate("/");
+        toast.error("Error verifying payment");
       } finally {
-        // Clean up URL so the homepage reloads cleanly
+        // remove ?reference from URL without reloading page
         window.history.replaceState({}, document.title, "/");
       }
     };
 
     verifyPayment();
-  }, [reference, navigate]);
+  }, [reference]);
   return (
     <div className="relative">
       <div className="hero-img  relative">

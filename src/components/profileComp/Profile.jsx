@@ -10,7 +10,7 @@ import legal from "../../assets/legal.png";
 import settings from "../../assets/settings.png";
 import help from "../../assets/help.png";
 import language from "../../assets/language.png";
-import profile2 from "../../assets/profile2.png";
+import { IoPersonCircle } from "react-icons/io5";
 import verify from "../../assets/verified2.png";
 import edit from "../../assets/edit.png";
 import down from "../../assets/arrow_down.png";
@@ -80,6 +80,8 @@ const Profile = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setFormData((prev) => ({ ...prev, photo: imageUrl }));
+      updateProfile({ photo: imageUrl });
+
       toast.success("Profile photo updated ✅");
     }
   };
@@ -183,11 +185,17 @@ const Profile = () => {
               <>
                 {/* Profile header */}
                 <div className="bg-[#EDF1F5] rounded-[19px] relative flex flex-col md:flex-row md:gap-[36px] gap-6 md:px-[34px] px-6 items-center w-full">
-                  <img
-                    src={formData.photo || profile2}
-                    alt=""
-                    className="w-[159px] h-[250px] py-[52px] rounded-full object-cover"
-                  />
+                  {formData.photo ? (
+                    <img
+                      src={formData.photo}
+                      alt="profile"
+                      className="w-[159px] h-[240px] py-[52px] rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-[159px] h-[159px] rounded-full bg-gray-200 flex items-center justify-center">
+                      <IoPersonCircle className="text-gray-400" size={80} />
+                    </div>
+                  )}
 
                   <input
                     type="file"

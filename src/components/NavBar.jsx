@@ -3,11 +3,12 @@ import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineLocationOn } from "react-icons/md";
-import profile from "../assets/profilepic.png";
 import { IoMenuOutline, IoCloseOutline } from "react-icons/io5";
 import SearchMobile from "../components/SearchComp/SearchMobile";
 import { AuthContext } from "../contexts/AuthContext";
 import { useProperties } from "../contexts/PropertiesContext";
+import { IoPersonCircle } from "react-icons/io5";
+
 
 const NavBar = () => {
   const { user, logout, loading } = useContext(AuthContext);
@@ -131,12 +132,21 @@ const NavBar = () => {
             </>
           ) : (
             <div className="relative group">
-              <img
-                src={user.photo || profile}
-                alt="profile"
-                className="w-10 h-10 rounded-full cursor-pointer border"
-                onClick={() => setShowDropdown(!showDropdown)}
-              />
+{user.photo ? (
+  <img
+    src={user.photo}
+    alt="profile"
+    className="w-10 h-10 rounded-full cursor-pointer border"
+    onClick={() => setShowDropdown(!showDropdown)}
+  />
+) : (
+  <IoPersonCircle
+    size={40}
+    className="cursor-pointer text-gray-400"
+    onClick={() => setShowDropdown(!showDropdown)}
+  />
+)}
+
               {showDropdown && (
                 <div className="absolute right-0 mt-2  bg-white border rounded-lg shadow-md w-40">
                   <Link
@@ -183,12 +193,15 @@ const NavBar = () => {
             <div className="w-6 h-6 border-2 border-gray-300 border-t-[#FF9A01] rounded-full animate-spin"></div>
           ) : user ? (
             <div className="relative group">
-              <img
-                src={user.photo || profile}
-                alt="profile"
-                className="w-9 h-9 rounded-full border cursor-pointer"
-                onClick={() => setMenuOpen(!menuOpen)}
-              />
+               {user.photo ? (
+                <img
+                  src={user.photo}
+                  alt="profile"
+                  className="w-9 h-9 rounded-full border cursor-pointer"
+                />
+              ) : (
+                <IoPersonCircle size={36} className="cursor-pointer text-gray-400" />
+              )}
               {menuOpen && (
                 <div className="absolute right-0 mt-2 bg-white border rounded-lg shadow-md w-40">
                   <Link
