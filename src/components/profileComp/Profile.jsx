@@ -189,11 +189,11 @@ const Profile = () => {
                     <img
                       src={formData.photo}
                       alt="profile"
-                      className="w-[159px] h-[240px] py-[52px] rounded-full object-cover"
+                      className="w-[159px] h-[240px] py-[52px] rounded-full object-cover  " size={100}
                     />
                   ) : (
-                    <div className="w-[159px] h-[159px] rounded-full bg-gray-200 flex items-center justify-center">
-                      <IoPersonCircle className="text-gray-400" size={80} />
+                    <div className="w-[159px] h-[159px] py-[52px]  rounded-full flex items-center justify-center">
+                      <IoPersonCircle className="text-gray-400" size={100} />
                     </div>
                   )}
 
@@ -206,7 +206,7 @@ const Profile = () => {
                   />
 
                   <div
-                    className="absolute md:bottom-[33px] top-40 md:left-[54px] flex items-center bg-white gap-2 md:p-3 p-2 rounded-[8px] cursor-pointer"
+                    className="absolute md:bottom-[40px] top-30 h-[40px] md:left-[54px] flex items-center bg-white gap-2 md:p-3 p-2 rounded-[8px] cursor-pointer"
                     onClick={() => fileInputRef.current.click()}
                   >
                     <img src={edit} alt="" className="w-4 h-4 sm:w-5 sm:h-5" />

@@ -323,14 +323,20 @@ const PaymenttDetails = ({ setScreen }) => {
                     <span className="text-gray-700 font-medium">Adults</span>
                     <div className="flex items-center gap-3">
                       <button
-                        onClick={() => updateGuestCount("adults", "decrement")}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          updateGuestCount("adults", "decrement");
+                        }}
                         className="px-3 py-1 border rounded-2xl hover:bg-gray-100"
                       >
                         -
                       </button>
                       <span>{guestCount.adults}</span>
                       <button
-                        onClick={() => updateGuestCount("adults", "increment")}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          updateGuestCount("adults", "increment");
+                        }}
                         className="px-3 py-1 border rounded-2xl hover:bg-gray-100"
                       >
                         +
@@ -342,18 +348,20 @@ const PaymenttDetails = ({ setScreen }) => {
                     <span>Children</span>
                     <div className="flex items-center gap-3">
                       <button
-                        onClick={() =>
-                          updateGuestCount("children", "decrement")
-                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          updateGuestCount("children", "decrement");
+                        }}
                         className="px-3 py-1 border rounded-2xl hover:bg-gray-100"
                       >
                         -
                       </button>
                       <span>{guestCount.children}</span>
                       <button
-                        onClick={() =>
-                          updateGuestCount("children", "increment")
-                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          updateGuestCount("children", "increment");
+                        }}
                         className="px-3 py-1 border rounded-2xl hover:bg-gray-100"
                       >
                         +
@@ -365,14 +373,20 @@ const PaymenttDetails = ({ setScreen }) => {
                     <span>Infants</span>
                     <div className="flex items-center gap-3">
                       <button
-                        onClick={() => updateGuestCount("infants", "decrement")}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          updateGuestCount("infants", "decrement");
+                        }}
                         className="px-3 py-1 border rounded-2xl hover:bg-gray-100"
                       >
                         -
                       </button>
                       <span>{guestCount.infants}</span>
                       <button
-                        onClick={() => updateGuestCount("infants", "increment")}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          updateGuestCount("infants", "increment");
+                        }}
                         className="px-3 py-1 border rounded-2xl hover:bg-gray-100"
                       >
                         +
