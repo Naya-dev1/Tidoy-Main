@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Marhey:wght@300..700&display=swap");
+
+@import "tailwindcss";
+
+#root {
+  max-width: 1440px;
+  margin: 0 auto;
+  font-family: "Manrope", sans-serif;
+}
+
+.hero-img {
+  background-image: url("./assets/Hero-image.png");
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.35); /* Adjust darkness */
+  background-blend-mode: overlay; /* Mix tint with the image */
+}
+/* 
+@media (max-width: 768px) {
+  .hero-img {
+    height: 100vh;
+    background-position: top;
+    background-size: cover;
+  }
+} */
+
+.stay {
+  font-family: "Marhey", sans-serif;
+}
+
+.react-calendar__navigation__label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2d2e2e;
+}
+
+.react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8a8a8a;
+  text-align: center;
+}
+
+.react-calendar__tile {
+  padding: 0.5rem 0;
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 500;
+  color: #2d2e2e;
+  transition: background 0.1s ease;
+}
+
+.react-calendar__tile:enabled:hover {
+  background-color: #f3f3f3;
+}
+
+.react-calendar__tile--active {
+  background-color: #ff9a01 !important;
+  color: white !important;
+}
+
+.react-calendar__tile--now {
+  background: #fbe8cb !important;
+  color: #2d2e2e;
+}
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* @keyframes slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+  animation-fill-mode: forwards;
+} */
