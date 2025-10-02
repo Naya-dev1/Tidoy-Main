@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import heroImg from "../assets/download (5).jfif";
-import lagos from "../assets/nigeria.png";
-import abuja from "../assets/algeria.png";
-import capetown from "../assets/denmark.png";
+import nigeria from "../assets/nigeria.png";
+import algeria from "../assets/algeria.png";
+import denmark from "../assets/denmark.png";
 import { useNavigate } from "react-router-dom";
 import { useProperties } from "../contexts/PropertiesContext";
 import { IoMdHeart } from "react-icons/io";
@@ -29,9 +29,9 @@ const Discover = () => {
   }, [properties]);
 
   const destinations = [
-    { img: lagos, name: "Lagos" },
-    { img: abuja, name: "Abuja" },
-    { img: capetown, name: "Cape Town" },
+    { img: nigeria, name: "Nigeria" },
+    { img: denmark, name: "Denmark" },
+    { img: algeria, name: "Algeria" },
   ];
 
   const handleDestinationClick = async (city) => {
