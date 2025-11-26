@@ -450,7 +450,7 @@ const MainHome = () => {
             {/* ==================== */}
 
 
-            <div className="bg-[#FBFBFB] md:w-[366px] flex flex-col gap-[51px] relative rounded-[12px]">
+            <div className="hidden md:block bg-[#FBFBFB] md:w-[366px] flex flex-col gap-[51px] relative rounded-[12px]">
               <img
                 src={pic}
                 alt=""
@@ -506,7 +506,7 @@ const MainHome = () => {
 
 
 
-            <div className="bg-[#FBFBFB] md:w-[366px] flex flex-col gap-[51px] relative rounded-[12px]">
+            <div className="hidden md:block bg-[#FBFBFB] md:w-[366px] flex flex-col gap-[51px] relative rounded-[12px]">
               <img
                 src={pic}
                 alt=""
