@@ -13,6 +13,7 @@ import { useHomeContext } from "../contexts/HomeContext";
 import { useProperties } from "../contexts/PropertiesContext";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import CreateWishlistModal from "../components/wishlist/CreateWishlistModal";
 
 function getDistance(lat1, lon1, lat2, lon2) {
   const R = 6371; // Radius of Earth in km
@@ -36,11 +37,20 @@ const NearBy = () => {
   //   { label: "Best Price" },
   // ];
   const { data, loading, error } = useHomeContext();
-  const { user } = useContext(AuthContext);
+  const {
+    user,
+    wishlist,
+    addPropertyToWishlist,
+    removeFromWishlist,
+    isPropertyLiked,
+  } = useContext(AuthContext);
 
   const [userLocation, setUserLocation] = useState(null);
   const [nearbyProperties, setNearbyProperties] = useState([]);
   const navigate = useNavigate();
+  const [propertyToAdd, setPropertyToAdd] = useState(null);
+
+  const [showModal, setShowModal] = useState(false);
 
   const {
     properties,
@@ -97,9 +107,22 @@ const NearBy = () => {
     }
   };
 
+  const handleLikeClick = (property) => {
+    if (!user) return navigate("/sign-in");
+
+    const liked = isPropertyLiked(property._id);
+
+    if (liked) {
+      removeFromWishlist(property._id);
+    } else {
+      setPropertyToAdd(property);
+      setShowModal(true);
+    }
+  };
+
   return (
-    <div >
-     <div className="z-50  backdrop-blur-[10px] bg-[#FBFBFB59]  fixed w-full top-0 sm:px-[100px] px-6 ">
+    <div>
+      <div className="z-50  backdrop-blur-[10px] bg-[#FBFBFB59]  fixed w-full top-0 sm:px-[100px] px-6 ">
         <NavBar />
       </div>
       <div className="md:px-[100px] px-6 pt-[120px]">
@@ -229,7 +252,15 @@ const NearBy = () => {
                     <p className="text-[#2D2E2E] text-base md:text-lg font-bold">
                       NGN {property.pricePerNight}/night
                     </p>
-                    <IoMdHeart className="text-lg md:text-xl text-[#ED1F4F]" />
+
+                    <IoMdHeart
+                      // onClick={() => handleLikeClick(property)}
+                      className={`text-lg md:text-xl cursor-pointer transition-colors duration-300 ${
+                        isPropertyLiked(property._id)
+                          ? "text-[#ED1F4F]"
+                          : "text-gray-400"
+                      }`}
+                    />
                   </div>
 
                   <button
@@ -248,6 +279,12 @@ const NearBy = () => {
           )}
         </div>
       </div>
+
+      <CreateWishlistModal
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        property={propertyToAdd}
+      />
     </div>
   );
 };

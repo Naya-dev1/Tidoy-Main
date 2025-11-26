@@ -9,6 +9,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import ResetPassword from "./pages/ResetPassword";
 import NearBy from "./pages/NearBy";
+import Wishlist from "./pages/Wishlist";
 import { DateProvider } from "./contexts/DateContext";
 import ProductDetail from "./pages/ProductDetail";
 import ProfilePage from "./pages/ProfilePage";
@@ -34,6 +35,7 @@ function App() {
                   <Route path="/sign-up" element={<SignUp />} />
                   <Route path="/reset-password" element={<ResetPassword />} />
                   <Route path="/nearby" element={<NearBy />} />
+                  <Route path="/wishlist" element={<Wishlist />} />
                   <Route
                     path="/product-detail/:id"
                     element={<ProductDetail />}

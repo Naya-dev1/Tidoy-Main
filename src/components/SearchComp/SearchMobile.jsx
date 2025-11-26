@@ -104,7 +104,7 @@ const SearchMobile = ({ onClose }) => {
 
       if (apartmentType && total > maxGuests) {
         toast.error(`Max ${maxGuests} guests allowed for ${apartmentType}`);
-        return; // don’t close
+        return; 
       }
       setShowGuestsModal(false);
     }
@@ -141,7 +141,6 @@ const SearchMobile = ({ onClose }) => {
     showDatePicker &&
     createPortal(
       <div className="fixed inset-0 z-[1000] flex items-end">
-        {/* Background overlay */}
         <div
           className="absolute inset-0 bg-black/50"
           onClick={() => setShowDatePicker(false)}
@@ -281,7 +280,7 @@ const SearchMobile = ({ onClose }) => {
                 key={a}
                 onClick={() => {
                   setApartmentType(a);
-                  setGuestCount({ adults: 0, children: 0, infants: 0 }); // reset guests
+                  setGuestCount({ adults: 0, children: 0, infants: 0 }); 
                 }}
                 className={`py-3 px-2 cursor-pointer hover:bg-gray-100 ${
                   apartmentType === a ? "font-semibold text-[#FF9A01]" : ""

@@ -71,7 +71,6 @@ const MainHome = () => {
           {properties.slice(0, 4).map((property) => (
             <div
               key={property.id}
-              onClick={() => navigate(`/product-detail/${property._id}`)}
               className="flex md:flex-row flex-col bg-[#EDF1F5] p-2 gap-2 rounded-[18px] cursor-pointer"
             >
               <img
@@ -141,7 +140,10 @@ const MainHome = () => {
                   <IoMdHeart className="text-xl text-[#ED1F4F]" />
                 </div>
 
-                <button className="bg-[#FF9A01] px-[36px] py-2.5 font-medium text-[18px] text-[#2D2E2E] rounded-[16px]">
+                <button
+                  onClick={() => navigate(`/product-detail/${property._id}`)}
+                  className="bg-[#FF9A01] px-[36px] py-2.5 font-medium text-[18px] text-[#2D2E2E] rounded-[16px]"
+                >
                   View Now
                 </button>
               </div>
@@ -155,7 +157,6 @@ const MainHome = () => {
             return (
               <div
                 key={property.id}
-                onClick={() => navigate(`/product-detail/${property._id}`)}
                 className="min-w-[280px] snap-start flex flex-col bg-[#EDF1F5] p-3 gap-3 rounded-[18px]"
               >
                 <img
@@ -194,7 +195,10 @@ const MainHome = () => {
                     <IoMdHeart className="text-xl text-[#ED1F4F]" />
                   </div>
 
-                  <button className="bg-[#FF9A01] px-[36px] py-2.5 font-medium text-[18px] text-[#2D2E2E] rounded-[16px]">
+                  <button
+                    onClick={() => navigate(`/product-detail/${property._id}`)}
+                    className="bg-[#FF9A01] px-[36px] py-2.5 font-medium text-[18px] text-[#2D2E2E] rounded-[16px]"
+                  >
                     View Now
                   </button>
                 </div>
@@ -390,7 +394,7 @@ const MainHome = () => {
             What Our Customers Say
           </h4>
           {/* ratings */}
-          <div>
+          <div className=" flex gap-4">
             <div className="bg-[#FBFBFB] md:w-[366px] flex flex-col gap-[51px] relative rounded-[12px]">
               <img
                 src={pic}
@@ -444,6 +448,116 @@ const MainHome = () => {
               </div>
             </div>
             {/* ==================== */}
+
+
+            <div className="bg-[#FBFBFB] md:w-[366px] flex flex-col gap-[51px] relative rounded-[12px]">
+              <img
+                src={pic}
+                alt=""
+                className="w-[89px] h-[89px] absolute left-[14px] top-[55px]"
+              />
+              <div className="bg-[#CCE1FF] py-[23px] rounded-t-[12px]">
+                <h5 className="text-center text-[20px] font-bold text-[#2D2E2E]">
+                  John Doe
+                </h5>
+                <p className="text-center text-[16px] font-medium text-[#2D2E2E]">
+                  Pediatrician
+                </p>
+              </div>
+              <div className="px-[18px] pb-[23px] space-y-[24px]">
+                <p className="font-normal text-[14px] text-[#2D2E2E]">
+                  I honestly didn’t think somewhere this serene could exist so
+                  close to Lagos. From the private boat ride to the sunset
+                  Jacuzzi, everything was perfect. The staff were warm and
+                  respectful, and the food was way better than I expected (try
+                  their grilled seafood platter!). Perfect place to disconnect,
+                  reconnect, and breathe again.
+                </p>
+
+                <div className="flex items-center gap-[7px]">
+                  <div className="flex items-center gap-[1px]">
+                    <img src={star} alt="" />
+                    <img src={star} alt="" />
+                    <img src={star} alt="" />
+                    <img src={star} alt="" />
+                    <img src={star} alt="" />
+                  </div>
+
+                  <p>5 Stars</p>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-[2px]">
+                    <MdOutlineCalendarMonth className="text-[18px] text-[#747677] " />
+                    <p className="text-[14px] text-[#2D2E2E] font-normal">
+                      12/12/2024
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-[2px]">
+                    <MdOutlineLocationOn className="text-[18px] text-[#747677] " />
+                    <p className="text-[14px] text-[#2D2E2E] font-normal">
+                      Vancouver, Canada
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div className="bg-[#FBFBFB] md:w-[366px] flex flex-col gap-[51px] relative rounded-[12px]">
+              <img
+                src={pic}
+                alt=""
+                className="w-[89px] h-[89px] absolute left-[14px] top-[55px]"
+              />
+              <div className="bg-[#CCE1FF] py-[23px] rounded-t-[12px]">
+                <h5 className="text-center text-[20px] font-bold text-[#2D2E2E]">
+                  John Doe
+                </h5>
+                <p className="text-center text-[16px] font-medium text-[#2D2E2E]">
+                  Pediatrician
+                </p>
+              </div>
+              <div className="px-[18px] pb-[23px] space-y-[24px]">
+                <p className="font-normal text-[14px] text-[#2D2E2E]">
+                  I honestly didn’t think somewhere this serene could exist so
+                  close to Lagos. From the private boat ride to the sunset
+                  Jacuzzi, everything was perfect. The staff were warm and
+                  respectful, and the food was way better than I expected (try
+                  their grilled seafood platter!). Perfect place to disconnect,
+                  reconnect, and breathe again.
+                </p>
+
+                <div className="flex items-center gap-[7px]">
+                  <div className="flex items-center gap-[1px]">
+                    <img src={star} alt="" />
+                    <img src={star} alt="" />
+                    <img src={star} alt="" />
+                    <img src={star} alt="" />
+                    <img src={star} alt="" />
+                  </div>
+
+                  <p>5 Stars</p>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-[2px]">
+                    <MdOutlineCalendarMonth className="text-[18px] text-[#747677] " />
+                    <p className="text-[14px] text-[#2D2E2E] font-normal">
+                      12/12/2024
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-[2px]">
+                    <MdOutlineLocationOn className="text-[18px] text-[#747677] " />
+                    <p className="text-[14px] text-[#2D2E2E] font-normal">
+                      Vancouver, Canada
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
